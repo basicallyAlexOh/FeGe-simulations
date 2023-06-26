@@ -4,9 +4,9 @@
 
 // FeGe-B20 Parameters (at 258 K)
 // From "Chiral Magnetic Excitations in FeGe Films"
-A = 6.8e-13 //J/m
-D = 0.12e-3 // J/m^2
-Ms = 150e3 // A/m
+A := 6.8e-13 //J/m
+D := 0.12e-3 // J/m^2
+Ms := 150e3 // A/m
 
 // Setting Universe
 // 256x256x16 units
