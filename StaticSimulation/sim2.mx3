@@ -27,7 +27,7 @@ tableautosave(10e-12)
 
 
 //Applying a 10 mT external B field in x direction)
-B_ext = vector(10e-3,0,0)
+B_ext = vector(10.0E-3,0,0)
 run(1e-9)
 
 
