@@ -8,6 +8,13 @@ Aex = 6.8e-13 //J/m
 Dind = 0.12e-3 // J/m^2
 Msat = 150e3 // A/m
 
+
+alpha = 0.038
+gf := 2
+muB := 9.27400968e-24
+hq := 1.054571726e-34
+gammaLL = gf * muB / hq
+
 // Setting Universe
 // 256x256x16 units
 // Each unit is 3 nm x 3 nm x 3 nm
