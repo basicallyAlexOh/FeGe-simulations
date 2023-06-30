@@ -1,0 +1,42 @@
+// Relaxation of FeGe-B20
+// Alex Oh
+// June 26, 2023
+
+// FeGe-B20 Parameters (at 258 K)
+// From "Chiral Magnetic Excitations in FeGe Films"
+Aex = 6.8e-13 //J/m
+Dind = 0.12e-3 // J/m^2
+Msat = 150e3 // A/m
+
+// Setting Universe
+// 256x256x16 units
+// Each unit is 3 nm x 3 nm x 3 nm
+
+//SetMesh(256, 256, 16, 3e-9, 3e-9, 3e-9, 0, 0, 0)
+SetMesh(128, 128, 8, 6e-9, 6e-9, 6e-9, 0, 0, 0)
+
+
+
+
+samp :=  Cuboid(600e-9, 600e-9, 30e-9)
+setgeom(samp)
+
+
+angle := 0
+f := 100e6
+Am := 0.5e-3
+
+for i := Bmax; i >= Bmin; i = i - 4 {
+	B_ext = vector((cos(angle*pi/180)*i*h)-(sin(angle*pi/180)*0)+(0), (sin(angle*pi/180)*i*h)+(cos(angle*pi/180)*0)+(0), Am*sin(2.*pi*f*t))
+	TableAutoSave(1e-10)
+	autosave(m, 1e-10)
+	run(time)
+	print(i)
+}
+
+
+
+
+
+
+

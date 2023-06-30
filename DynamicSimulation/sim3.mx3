@@ -11,8 +11,9 @@ Msat = 150e3 // A/m
 // Setting Universe
 // 256x256x16 units
 // Each unit is 3 nm x 3 nm x 3 nm
-SetMesh(256, 256, 16, 3e-9, 3e-9, 3e-9, 0, 0, 0)
 
+//SetMesh(256, 256, 16, 3e-9, 3e-9, 3e-9, 0, 0, 0)
+SetMesh(128, 128, 8, 6e-9, 6e-9, 6e-9, 0, 0, 0)
 
 
 
@@ -23,11 +24,6 @@ setgeom(samp)
 
 
 
-
-
-autosave(m, 200e-12)
-tableautosave(10e-12)
-
 tstep := 1e-11
 endtime := 1e-7
 
@@ -37,30 +33,32 @@ freqstep := 100e6
 endfreq := 500e6
 
 B_x := 10.0E-3
-maxdt = 1e-12
-mindt = 1e-13
+
+
+count := 0
 
 for amp := 0.1; amp <= endamp; amp += ampstep {
 	for freq := 100e6; freq <= endfreq; freq += freqstep{
 		m = RandomMag()
-		relax()	
-		Print("Amplitude and Freq")
-		Print(amp)
+		print("relaxing")
+		relax()
+		print("Amplitude and Freq")
+		print(amp)
 		print(freq)
-		for time := 0; time <= endtime; time+=tstep {
-			B_z := Mul(amp, sin(Mul(Mul(2, pi), Mul(freq, time))))
+		for time := 0.0; time <= endtime; time+=tstep {
+			B_z := amp * sin(2*pi*freq*time)
 			B_ext = vector(B_x, 0, B_z)
-			if time % (endtime / 10) < 0.001 {
+			if mod(count, 100) == 0 {
 				save(m)
+				print("saving")
 			}
+			count += 1
 			run(tstep)
 		}
 	
 	}
 }
 
-
-=
 
 
 
