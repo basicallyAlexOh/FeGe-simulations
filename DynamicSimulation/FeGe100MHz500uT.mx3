@@ -15,6 +15,7 @@ muB := 9.27400968e-24
 hq := 1.054571726e-34
 gammaLL = gf * muB / hq
 
+
 // Setting Universe
 // 256x256x16 units
 // Each unit is 3 nm x 3 nm x 3 nm
@@ -33,13 +34,118 @@ angle := 0
 f := 100e6
 Am := 0.5e-3
 
-for i := Bmax; i >= Bmin; i = i - 4 {
+Bmax := 500
+Bmin := -500
+h := 1e-3
+
+
+OutputFormat = OVF1_BINARY
+tableadd(B_ext)
+tableadd(B_eff)
+tableadd(B_anis)
+tableadd(B_demag)
+tableadd(B_exch)
+tableadd(B_therm)
+tableadd(E_anis)
+tableadd(E_demag)
+tableadd(E_exch)
+tableadd(B_ext)
+tableadd(B_eff)
+tableadd(B_anis)
+tableadd(B_demag)
+tableadd(B_exch)
+tableadd(B_therm)
+tableadd(E_anis)
+tableadd(E_demag)
+tableadd(E_exch)
+tableadd(E_therm)
+tableadd(E_total)
+tableadd(E_Zeeman)
+tableadd(Edens_anis)
+tableadd(Edens_demag)
+tableadd(Edens_exch)
+tableadd(Edens_therm)
+tableadd(Edens_total)
+tableadd(Edens_Zeeman)
+tableadd(ExchCoupling)
+tableadd(m_full)
+tableadd(maxtorque)
+tableadd(LLtorque)
+tableadd(torque)
+tableadd(STtorque)
+tableadd(MaxAngle)
+tableadd(spinAngle)
+tableadd(geom)
+tableadd(dt)
+tableadd(LastErr)
+tableadd(NEval)
+tableadd(PeakErr)
+tableadd(E_therm)
+tableadd(E_total)
+tableadd(E_Zeeman)
+tableadd(Edens_anis)
+tableadd(Edens_demag)
+tableadd(Edens_exch)
+tableadd(Edens_therm)
+tableadd(Edens_total)
+tableadd(Edens_Zeeman)
+tableadd(ExchCoupling)
+tableadd(m_full)
+tableadd(maxtorque)
+tableadd(LLtorque)
+tableadd(torque)
+tableadd(STtorque)
+tableadd(MaxAngle)
+tableadd(spinAngle)
+tableadd(geom)
+tableadd(dt)
+tableadd(LastErr)
+tableadd(NEval)
+tableadd(B_ext)
+tableadd(B_eff)
+tableadd(B_anis)
+tableadd(B_demag)
+tableadd(B_exch)
+tableadd(B_therm)
+tableadd(E_anis)
+tableadd(E_demag)
+tableadd(E_exch)
+tableadd(E_therm)
+tableadd(E_total)
+tableadd(E_Zeeman)
+tableadd(Edens_anis)
+tableadd(Edens_demag)
+tableadd(Edens_exch)
+tableadd(Edens_therm)
+tableadd(Edens_total)
+tableadd(Edens_Zeeman)
+tableadd(ExchCoupling)
+tableadd(m_full)
+tableadd(maxtorque)
+tableadd(LLtorque)
+tableadd(torque)
+tableadd(STtorque)
+tableadd(MaxAngle)
+tableadd(spinAngle)
+tableadd(geom)
+tableadd(dt)
+tableadd(LastErr)
+tableadd(NEval)
+tableadd(PeakErr)
+tableadd(PeakErr)
+
+
+for i := Bmax; i >= Bmin; i = i - 1 {
 	B_ext = vector((cos(angle*pi/180)*i*h)-(sin(angle*pi/180)*0)+(0), (sin(angle*pi/180)*i*h)+(cos(angle*pi/180)*0)+(0), Am*sin(2.*pi*f*t))
 	TableAutoSave(1e-10)
 	autosave(m, 1e-10)
 	run(time)
 	print(i)
 }
+
+
+
+
 
 
 
