@@ -1,0 +1,73 @@
+// Relaxation of FeGd
+// Alex Oh
+// June 26, 2023
+
+
+// https://www.nature.com/articles/s42005-022-01073-0
+
+Aex = 5e-12 //J/m
+Msat = 400e3 // A/m
+Ku1 = 40000 // J/m^3
+anisU = Vector(0,0,1)
+
+
+
+
+
+Ae := 5e-12 //J/m
+Ms := 400e3 // A/m
+
+lex := Sqrt(Ae / (1 / 2 * Mu0 * pow(Ms, 2)))
+print("Exchange length S (m):", lex)
+
+alpha = 0.038
+gf := 2
+muB := 9.27400968e-24
+hq := 1.054571726e-34
+gammaLL = gf * muB / hq
+
+
+// Setting Universe
+// 256x256x16 units
+// Each unit is 5 nm x 5 nm x 5 nm
+//SetMesh(1600, 1600, 4, 5e-9, 5e-9, 5e-9, 0, 0, 0)
+
+SetMesh(512, 512, 4, 10e-9, 5e-9, 5e-9, 0, 0, 0)
+
+
+block :=  Cuboid(8e-6, 8e-6, 20e-9)
+cut1 := Cuboid(4.6e-6, 5e-6, 20e-9)
+cut1moved := cut1.transl(-4e-6, 4e-6, 0)
+cut2 := Cuboid(5.2e-6, 3e-6, 20e-9)
+cut2moved := cut2.transl(-4e-6, -2e-6, 0)
+hole := Cylinder(0.2e-6, 20e-9)
+hole1 := hole.transl(-0.25e-6, 0.7e-6, 0)
+hole2 := hole.transl(0.9e-6, 0.7e-6, 0)
+hole3 := hole.transl(2.2e-6, 0.7e-6, 0)
+
+hole4 := hole.transl(-0.25e-6, -0.4e-6, 0)
+hole5 := hole.transl(0.9e-6, -0.4e-6, 0)
+hole6 := hole.transl(2.2e-6, -0.4e-6, 0)
+
+hole7 := hole.transl(-0.25e-6, -1.5e-6, 0)
+hole8 := hole.transl(0.9e-6, -1.5e-6, 0)
+hole9 := hole.transl(2.3e-6, -1.7e-6, 0)
+
+//samp := block.sub(cut1moved).sub(cut2moved).sub(hole1).sub(hole2).sub(hole3).sub(hole4).sub(hole5).sub(hole6).sub(hole7).sub(hole8).sub(hole9)
+
+newblock := Cuboid(2e-6, 2e-6, 20e-9)
+samp := block
+
+setgeom(samp)
+
+
+m = RandomMag()
+B_ext = vector(0,0,1)
+relax()
+minimize()
+
+B_ext = vector(0,0,0)
+relax()
+minimize()
+save(m)
+

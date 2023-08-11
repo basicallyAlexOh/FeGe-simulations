@@ -1,0 +1,54 @@
+// Relaxation of FeGe-B20
+// Alex Oh
+// June 26, 2023
+
+// FeGe-B20 Parameters (at 258 K)
+// From "Chiral Magnetic Excitations in FeGe Films"
+Aex = 6.8e-13 //J/m
+Dind = 0.12e-3 // J/m^2
+Msat = 150e3 // A/m
+
+
+alpha = 0.038
+gf := 2
+muB := 9.27400968e-24
+hq := 1.054571726e-34
+gammaLL = gf * muB / hq
+
+// Setting Universe
+// 256x256x16 units
+// Each unit is 5 nm x 5 nm x 5 nm
+SetMesh(1024, 1024, 16, 8e-9, 8e-9, 8e-9, 0, 0, 0)
+
+
+
+block :=  Cuboid(8e-6, 8e-6, 60e-9)
+cut1 := Cuboid(4.6e-6, 5e-6, 60e-9)
+cut1moved := cut1.transl(-4e-6, 4e-6, 0)
+cut2 := Cuboid(5.2e-6, 3e-6, 60e-9)
+cut2moved := cut2.transl(-4e-6, -2e-6, 0)
+hole := Cylinder(0.5e-6, 60e-9)
+hole1 := hole.transl(-0.25e-6, 0.7e-6, 0)
+hole2 := hole.transl(0.9e-6, 0.7e-6, 0)
+hole3 := hole.transl(2.2e-6, 0.7e-6, 0)
+
+hole4 := hole.transl(-0.25e-6, -0.4e-6, 0)
+hole5 := hole.transl(0.9e-6, -0.4e-6, 0)
+hole6 := hole.transl(2.2e-6, -0.4e-6, 0)
+
+hole7 := hole.transl(-0.25e-6, -1.5e-6, 0)
+hole8 := hole.transl(0.9e-6, -1.5e-6, 0)
+hole9 := hole.transl(2.3e-6, -1.7e-6, 0)
+
+samp := block.sub(cut1moved).sub(cut2moved).sub(hole1).sub(hole2).sub(hole3).sub(hole4).sub(hole5).sub(hole6).sub(hole7).sub(hole8).sub(hole9)
+
+setgeom(samp)
+
+B_ext = vector(0,0,0)
+m = RandomMag()
+relax()
+save(m)
+
+
+
+

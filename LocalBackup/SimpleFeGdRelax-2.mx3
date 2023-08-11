@@ -1,0 +1,55 @@
+
+Aex = 5e-12 //J/m
+Msat = 4e5 // A/m
+Ku1 = 4e4 // J/m^3
+anisU = Vector(0,0,1)
+
+
+// Setting Universe
+// 256x256x16 units
+// Each unit is 5 nm x 5 nm x 5 nm
+SetMesh(300, 300, 16, 5e-9, 5e-9, 5e-9, 0, 0, 0)
+
+
+
+block := Cuboid(1500e-9, 1500e-9, 80e-9)
+setgeom(block)
+
+
+m = RandomMag()
+
+B_ext = vector(0,0,0)
+relax()
+minimize()
+save(m)
+
+
+
+amp := 1.0
+theta := 1.0 //degree
+phi := 30.0 //degree
+
+B_ext = vector(amp * (cos(phi*pi/180)) * sin(theta * pi / 180), amp * (sin(phi*pi/180)) * sin(theta*pi/180), amp * cos(theta*pi/180))
+relax()
+save(m)
+
+
+amp = 0.0
+B_ext = vector(amp * (cos(phi*pi/180)) * sin(theta * pi / 180), amp * (sin(phi*pi/180)) * sin(theta*pi/180), amp * cos(theta*pi/180))
+relax()
+save(m)
+
+
+amp = 0.17
+B_ext = vector(amp * (cos(phi*pi/180)) * sin(theta * pi / 180), amp * (sin(phi*pi/180)) * sin(theta*pi/180), amp * cos(theta*pi/180))
+relax()
+save(m)
+
+
+amp = 0.0
+B_ext = vector(0,0,0)
+relax()
+save(m)
+
+
+

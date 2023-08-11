@@ -1,0 +1,156 @@
+// Relaxation of FeGe-B20
+// Alex Oh
+// June 26, 2023
+
+// FeGe-B20 Parameters (at 258 K)
+// From "Chiral Magnetic Excitations in FeGe Films"
+Aex = 6.8e-13 //J/m
+Dind = 0.12e-3 // J/m^2
+Msat = 150e3 // A/m
+
+
+alpha = 0.038
+gf := 2
+muB := 9.27400968e-24
+hq := 1.054571726e-34
+gammaLL = gf * muB / hq
+
+
+// Setting Universe
+// 256x256x16 units
+// Each unit is 3 nm x 3 nm x 3 nm
+
+SetMesh(256, 256, 16, 3e-9, 3e-9, 3e-9, 0, 0, 0)
+//SetMesh(128, 128, 8, 6e-9, 6e-9, 6e-9, 0, 0, 0)
+
+
+
+
+samp :=  Cuboid(600e-9, 600e-9, 30e-9)
+setgeom(samp)
+
+
+angle := 0
+f := 100e6
+Am := 0.5e-3
+time := 1e-9
+
+Bmax := 500
+Bmin := -500
+h := 1e-3
+
+
+OutputFormat = OVF1_BINARY
+tableadd(B_ext)
+tableadd(B_eff)
+tableadd(B_anis)
+tableadd(B_demag)
+tableadd(B_exch)
+tableadd(B_therm)
+tableadd(E_anis)
+tableadd(E_demag)
+tableadd(E_exch)
+tableadd(B_ext)
+tableadd(B_eff)
+tableadd(B_anis)
+tableadd(B_demag)
+tableadd(B_exch)
+tableadd(B_therm)
+tableadd(E_anis)
+tableadd(E_demag)
+tableadd(E_exch)
+tableadd(E_therm)
+tableadd(E_total)
+tableadd(E_Zeeman)
+tableadd(Edens_anis)
+tableadd(Edens_demag)
+tableadd(Edens_exch)
+tableadd(Edens_therm)
+tableadd(Edens_total)
+tableadd(Edens_Zeeman)
+tableadd(ExchCoupling)
+tableadd(m_full)
+tableadd(maxtorque)
+tableadd(LLtorque)
+tableadd(torque)
+tableadd(STtorque)
+tableadd(MaxAngle)
+tableadd(spinAngle)
+tableadd(geom)
+tableadd(dt)
+tableadd(LastErr)
+tableadd(NEval)
+tableadd(PeakErr)
+tableadd(E_therm)
+tableadd(E_total)
+tableadd(E_Zeeman)
+tableadd(Edens_anis)
+tableadd(Edens_demag)
+tableadd(Edens_exch)
+tableadd(Edens_therm)
+tableadd(Edens_total)
+tableadd(Edens_Zeeman)
+tableadd(ExchCoupling)
+tableadd(m_full)
+tableadd(maxtorque)
+tableadd(LLtorque)
+tableadd(torque)
+tableadd(STtorque)
+tableadd(MaxAngle)
+tableadd(spinAngle)
+tableadd(geom)
+tableadd(dt)
+tableadd(LastErr)
+tableadd(NEval)
+tableadd(B_ext)
+tableadd(B_eff)
+tableadd(B_anis)
+tableadd(B_demag)
+tableadd(B_exch)
+tableadd(B_therm)
+tableadd(E_anis)
+tableadd(E_demag)
+tableadd(E_exch)
+tableadd(E_therm)
+tableadd(E_total)
+tableadd(E_Zeeman)
+tableadd(Edens_anis)
+tableadd(Edens_demag)
+tableadd(Edens_exch)
+tableadd(Edens_therm)
+tableadd(Edens_total)
+tableadd(Edens_Zeeman)
+tableadd(ExchCoupling)
+tableadd(m_full)
+tableadd(maxtorque)
+tableadd(LLtorque)
+tableadd(torque)
+tableadd(STtorque)
+tableadd(MaxAngle)
+tableadd(spinAngle)
+tableadd(geom)
+tableadd(dt)
+tableadd(LastErr)
+tableadd(NEval)
+tableadd(PeakErr)
+tableadd(PeakErr)
+
+
+for i := Bmax; i >= Bmin; i = i - 1 {
+	B_ext = vector(0.05, 0, Am*sin(2.*pi*f*t))
+	TableAutoSave(1e-9)
+	autosave(m, 1e-9)
+	run(time)
+	print(i)
+}
+
+
+
+
+
+
+
+
+
+
+

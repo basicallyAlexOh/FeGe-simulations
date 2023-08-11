@@ -1,0 +1,45 @@
+Aex = 5e-12 //J/m
+Msat = 4e5 // A/m
+Ku1 = 4e4 // J/m^3
+anisU = Vector(0,0,1)
+
+
+// Setting Universe
+// 256x256x16 units
+// Each unit is 5 nm x 5 nm x 5 nm
+SetMesh(100, 100, 16, 6e-9, 6e-9, 6e-9, 0, 0, 0)
+
+
+
+block :=  Cuboid(0.6e-6, 0.6e-6, 96e-9)
+setgeom(block)
+
+m = RandomMag()
+
+
+B_ext = vector(0, 0, 0)
+relax()
+minimize()
+save(m)
+
+B_ext = vector(0.4 * sin(pi / 4), 0, 0.4 * cos(pi / 4))
+relax()
+minimize()
+save(m)
+
+B_ext = vector(0,0,0)
+relax()
+minimize()
+save(m)
+
+B_ext = vector(0, 0, 0.24)
+relax()
+minimize()
+save(m)
+
+B_ext = vector(0,0,0)
+relax()
+minimize()
+save(m)
+
+

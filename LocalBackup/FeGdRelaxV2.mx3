@@ -1,0 +1,98 @@
+
+Aex = 5e-12 //J/m
+Msat = 4e5 // A/m
+Ku1 = 4e4 // J/m^3
+anisU = Vector(0,0,1)
+
+
+alpha = 0.038
+gf := 2
+muB := 9.27400968e-24
+hq := 1.054571726e-34
+gammaLL = gf * muB / hq
+
+
+tableadd(B_ext)
+tableadd(B_eff)
+tableadd(B_anis)
+tableadd(B_demag)
+tableadd(B_exch)
+tableadd(B_therm)
+tableadd(E_anis)
+tableadd(E_demag)
+tableadd(E_exch)
+tableadd(E_therm)
+tableadd(E_total)
+tableadd(E_Zeeman)
+tableadd(Edens_anis)
+tableadd(Edens_demag)
+tableadd(Edens_exch)
+tableadd(Edens_therm)
+tableadd(Edens_total)
+tableadd(Edens_Zeeman)
+tableadd(ExchCoupling)
+tableadd(m_full)
+tableadd(maxtorque)
+tableadd(LLtorque)
+tableadd(torque)
+tableadd(STtorque)
+tableadd(MaxAngle)
+tableadd(spinAngle)
+tableadd(geom)
+tableadd(dt)
+tableadd(LastErr)
+tableadd(NEval)
+tableadd(PeakErr)
+
+
+// Each unit is 5 nm x 5 nm x 5 nm
+SetMesh(800, 800, 16, 5e-9, 5e-9, 5e-9, 0, 0, 0)
+
+
+
+block :=  Cuboid(4e-6, 4e-6, 80e-9)
+hole := Cylinder(0.3e-6, 80e-9)
+hole1 := hole.transl(-1.4e-6, -1.0e-6, 0)
+hole2 := hole.transl(0, -1.0e-6, 0)
+
+samp := block.sub(hole1).sub(hole2)
+
+setgeom(samp)
+
+
+m = RandomMag()
+
+
+B_ext = vector(0, 0, 0)
+relax()
+minimize()
+save(m)
+TableSave()
+
+
+B_ext = vector(0.4 * sin(pi / 4), 0, 0.4 * cos(pi / 4))
+relax()
+minimize()
+save(m)
+TableSave()
+
+B_ext = vector(0,0,0)
+relax()
+minimize()
+save(m)
+TableSave()
+
+B_ext = vector(0, 0, 0.24)
+relax()
+minimize()
+save(m)
+TableSave()
+
+B_ext = vector(0,0,0)
+relax()
+minimize()
+save(m)
+TableSave()
+
+
+
